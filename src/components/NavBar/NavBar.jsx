@@ -34,7 +34,7 @@ const NavBar = () => {
 
           <Link
             href="/"
-            className="hover:scale-105 hover:btn text-xl  tracking-[0.25em] md:text-2xl rounded-full p-2 font-bold transition duration-200"
+            className="hover:btn  md:text-2xl rounded-full p-2 font-bold "
           >
             ELÀRÀ
           </Link>
