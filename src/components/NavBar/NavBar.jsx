@@ -7,7 +7,7 @@ const NavBar = () => {
   const param = usePathname();
 
   return (
-    <header className="w-full font-sans z-50 absolute top-0 left-0 text-white">
+    <header className="w-full font-sans z-50 absolute top-0 left-0 text-[#f1bda7]">
       {/* Container matching standard layout widths */}
       <div className="max-w-7xl mx-auto px-6 py-6 md:px-12 md:py-8">
         {/* Navigation Wrapper */}
@@ -17,7 +17,7 @@ const NavBar = () => {
             <Link
               href="/shop"
               className={`${
-                param === "/shop" ? "bg-black" : ""
+                param === "/shop" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
               Shop
@@ -25,7 +25,7 @@ const NavBar = () => {
             <Link
               href="/about"
               className={`${
-                param === "/about" ? "bg-black" : ""
+                param === "/about" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
               About
@@ -34,7 +34,7 @@ const NavBar = () => {
 
           <Link
             href="/"
-            className="hover:btn  md:text-2xl rounded-full p-2 font-bold "
+            className=" md:text-2xl rounded-full p-2 font-bold "
           >
             ELÀRÀ
           </Link>
@@ -44,7 +44,7 @@ const NavBar = () => {
             <Link
               href="/login"
               className={`${
-                param === "/login" ? "bg-black" : ""
+                param === "/login" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
               Login
@@ -52,7 +52,7 @@ const NavBar = () => {
             <Link
               href="/blog"
               className={`${
-                param === "/blog" ? "bg-black" : ""
+                param === "/blog" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
               Blog
