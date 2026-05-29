@@ -5,24 +5,24 @@ import AllCards from "@/app/AllCards/AllCards";
 import PaginationBasic from "@/components/Pagination/Pagination";
 
 const ShopPage = () => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
   useEffect(() => {
     const handleData = async () => {
-      const searchData = await getSearchProducts();
+      const searchData = await getSearchProducts(search);
       setData(searchData);
     };
     handleData();
-  }, []);
+  }, [search]);
 
   return (
     <div className="mt-20 mx-auto w-11/12">
-      <div>
+      <div className="my-10 flex justify-end">
         <input
-          value={search}
+      value={search}
           onChange={(e) => setSearch(e.target.value)}
           type="search"
-          placeholder="Search"
+          placeholder="Search..."
           className="p-2 flex justify-end"
         />
       </div>

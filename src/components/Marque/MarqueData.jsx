@@ -1,10 +1,10 @@
-import { getProducts } from '@/app/api/Server';
+import {getSearchProducts } from '@/app/api/Server';
 import Image from 'next/image';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 
 const MarqueData = async() => {
-    const productsData=await getProducts()
+    const productsData=await getSearchProducts()
     
   return (
    <div className="w-full space-x-5 overflow-hidden py-6">
