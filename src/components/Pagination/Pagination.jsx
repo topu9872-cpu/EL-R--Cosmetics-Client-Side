@@ -3,12 +3,16 @@
 import {Pagination} from "@heroui/react";
 import {useState} from "react";
 
-const PaginationBasic=()=> {
-  const [page, setPage] = useState(1);
-  const totalPages = 3;
+const PaginationBasic=({ page,total, setPage})=> {
+ 
+
 
   return (
-    <Pagination className="justify-center my-10">
+    <Pagination 
+     page={page}
+        total={total}
+      
+    className="justify-center my-10">
       <Pagination.Content>
         <Pagination.Item>
           <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
@@ -16,7 +20,7 @@ const PaginationBasic=()=> {
             <span>Previous</span>
           </Pagination.Previous>
         </Pagination.Item>
-        {Array.from({length: totalPages}, (_, i) => i + 1).map((p) => (
+        {Array.from({length: total}, (_, i) => i + 1).map((p) => (
           <Pagination.Item key={p}>
             <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
               {p}
@@ -24,7 +28,7 @@ const PaginationBasic=()=> {
           </Pagination.Item>
         ))}
         <Pagination.Item>
-          <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
+          <Pagination.Next isDisabled={page === total} onPress={() => setPage((p) => p + 1)}>
             <span>Next</span>
             <Pagination.NextIcon />
           </Pagination.Next>

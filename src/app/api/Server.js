@@ -1,8 +1,8 @@
 
 
-export const getSearchProducts=async(search='')=>{
+export const getSearchProducts=async(search='', page=1)=>{
     try{
-const res=await fetch(`${process.env.NEXT_PUBLIC_SERVER_API}/products?search=${search}`);
+const res=await fetch(`${process.env.NEXT_PUBLIC_SERVER_API}/products?search=${search}&page=${page}`);
 if(!res.ok) throw new Error('faild to fatch search products data')
     return res.json();
     }catch(error){
