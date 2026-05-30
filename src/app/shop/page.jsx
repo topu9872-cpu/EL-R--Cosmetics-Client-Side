@@ -35,7 +35,7 @@ const ShopPage = () => {
           }}
           type="search"
           placeholder="Search products..."
-          className="p-2 border rounded w-full md:w-80"
+          className="p-2 border rounded w-full md:w-60"
         />
       </div>
 

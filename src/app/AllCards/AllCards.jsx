@@ -1,10 +1,13 @@
+
+import { CosmeticsModalUi } from "@/components/CosmeticsModalUi/CosmeticsModalUi";
 import Image from "next/image";
 import Link from "next/link";
 
 const AllCards = ({ product }) => {
 
   return (
-    <div className="card bg-base-100 shadow-md rounded-2xl overflow-hidden">
+    <div className="card bg-base-100  shadow-md rounded-2xl overflow-hidden">
+      
       <Image
         src={product.image}
         width={400}
@@ -36,9 +39,10 @@ const AllCards = ({ product }) => {
         </div>
 
         <div className="flex justify-between items-center pt-2">
-          <button className="btn btn-sm btn-primary">Order Now</button>
+         <CosmeticsModalUi product={product}/>
+         
           <Link
-            className="btn btn-sm btn-primary"
+            className="btn text-[#ef885b] bg-[#F5ECE8]"
             href={`/AllCards/${product._id}`}
           >
             Details

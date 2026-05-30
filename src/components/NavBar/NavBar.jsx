@@ -23,19 +23,16 @@ const NavBar = () => {
               Shop
             </Link>
             <Link
-              href="/about"
+              href="/cart"
               className={`${
-                param === "/about" ? "bg-black text-white" : ""
+                param === "/cart" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
-              About
+              Cart
             </Link>
           </div>
 
-          <Link
-            href="/"
-            className=" md:text-2xl rounded-full p-2 font-bold "
-          >
+          <Link href="/" className=" md:text-2xl rounded-full p-2 font-bold ">
             ELÀRÀ
           </Link>
 
@@ -50,12 +47,12 @@ const NavBar = () => {
               Login
             </Link>
             <Link
-              href="/blog"
+              href="/about"
               className={`${
-                param === "/blog" ? "bg-black text-white" : ""
+                param === "/about" ? "bg-black text-white" : ""
               } hover:scale-105 rounded-full p-2 font-bold transition duration-200`}
             >
-              Blog
+              About
             </Link>
           </div>
         </nav>
