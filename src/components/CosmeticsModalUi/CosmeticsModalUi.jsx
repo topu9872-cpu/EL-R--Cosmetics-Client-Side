@@ -2,12 +2,26 @@
 
 import { ShoppingCart } from "lucide-react";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { getBookingProducts } from "@/app/api/Server";
+import toast from "react-hot-toast";
 
 export function CosmeticsModalUi({ product }) {
-  const handleBye =(e) => {
+  const handleBye = async (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
-    console.log(formData);
+    const data = {
+      product:product.name,
+      image:product.image,
+      name: formData.name,
+      number: formData.number,
+      email: formData.email,
+      location: formData.location,
+      quantity: Number(formData.quantity),
+    };
+    const getData = await getBookingProducts(data);
+    if(getData){
+      toast.success('Order Processed Successfully !')
+    }
   };
 
   return (
@@ -16,31 +30,30 @@ export function CosmeticsModalUi({ product }) {
       <Button className="btn btn-sm bg-[#F5ECE8] text-[#ef885b]">
         Order Now
       </Button>
-      
-        <Modal.Backdrop>
-          {/* FIXED: add flex center wrapper */}
-          <Modal.Container className="flex items-center justify-center min-h-screen">
-            <Modal.Dialog className="sm:max-w-md w-[92%] max-h-[85vh] overflow-y-auto">
-              <Modal.CloseTrigger />
 
-              {/* Header */}
-              <Modal.Header>
-                <Modal.Icon className="bg-[#F5ECE8] text-[#f49d77]">
-                  <ShoppingCart className="size-5" />
-                </Modal.Icon>
+      <Modal.Backdrop>
+        {/* FIXED: add flex center wrapper */}
+        <Modal.Container className="flex items-center justify-center min-h-screen">
+          <Modal.Dialog className="sm:max-w-md w-[92%] max-h-[85vh] overflow-y-auto">
+            <Modal.CloseTrigger />
 
-                <Modal.Heading>{product?.name}</Modal.Heading>
+            {/* Header */}
+            <Modal.Header>
+              <Modal.Icon className="bg-[#F5ECE8] text-[#f49d77]">
+                <ShoppingCart className="size-5" />
+              </Modal.Icon>
 
-                <p className="mt-1.5 text-sm text-muted">
-                  {product?.description}
-                </p>
-              </Modal.Header>
+              <Modal.Heading>{product?.name}</Modal.Heading>
 
-              {/* Body */}
-              <Modal.Body className="p-6">
+              <p className="mt-1.5 text-sm text-muted">
+                {product?.description}
+              </p>
+            </Modal.Header>
 
-                <Surface>
-                    <form onSubmit={handleBye}>
+            {/* Body */}
+            <Modal.Body className="p-6">
+              <Surface>
+                <form onSubmit={handleBye}>
                   <div className="flex flex-col gap-4">
                     {/* Product Image */}
                     <img
@@ -82,25 +95,26 @@ export function CosmeticsModalUi({ product }) {
                       <Input type="number" name="quantity" min={1} />
                     </TextField>
                   </div>
-                    <Modal.Footer className="my-6">
-                <Button slot="close" variant="secondary">
-                  Cancel
-                </Button>
+                  <Modal.Footer className="my-6">
+                    <Button slot="close" variant="secondary">
+                      Cancel
+                    </Button>
 
-                <Button type="submit" className="bg-[#F5ECE8] text-[#ef885b]">
-                  Order Now
-                </Button>
-              </Modal.Footer>
-                  </form>
-                </Surface>
-              </Modal.Body>
+                    <Button slot="close"
+                      type="submit"
+                      className="bg-[#F5ECE8] text-[#ef885b]"
+                    >
+                      Order Now
+                    </Button>
+                  </Modal.Footer>
+                </form>
+              </Surface>
+            </Modal.Body>
 
-              {/* Footer */}
-            
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal.Backdrop>
-  
+            {/* Footer */}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 }
