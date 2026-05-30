@@ -1,36 +1,34 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
+import { getCartProductEdit } from "@/app/api/Server";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
-import { getBookingProducts } from "@/app/api/Server";
+import { ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export function CosmeticsModalUi({ product }) {
-  const handleBye = async (e) => {
+const OrderEditForm = ({ product }) => {
+  const router = useRouter();
+  const handleOrderEdit = async (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
     const data = {
-      product:product.name,
-      product:product.price,
-      image:product.image,
       name: formData.name,
       number: formData.number,
       email: formData.email,
       location: formData.location,
       quantity: Number(formData.quantity),
     };
-    const getData = await getBookingProducts(data);
-    if(getData){
-      toast.success('Order Processed Successfully !')
+    const editData = await getCartProductEdit(data, product._id);
+    if (editData) {
+      toast.success("product updated successfully !");
+      router.refresh();
     }
   };
 
   return (
     <Modal>
       {/* Trigger */}
-      <Button className="btn btn-sm bg-[#F5ECE8] text-[#ef885b]">
-        Order Now
-      </Button>
+      <Button>Edit Order</Button>
 
       <Modal.Backdrop>
         {/* FIXED: add flex center wrapper */}
@@ -44,7 +42,7 @@ export function CosmeticsModalUi({ product }) {
                 <ShoppingCart className="size-5" />
               </Modal.Icon>
 
-              <Modal.Heading>{product?.name}</Modal.Heading>
+              <Modal.Heading>{product?.product}</Modal.Heading>
 
               <p className="mt-1.5 text-sm text-muted">
                 {product?.description}
@@ -54,7 +52,7 @@ export function CosmeticsModalUi({ product }) {
             {/* Body */}
             <Modal.Body className="p-6">
               <Surface>
-                <form onSubmit={handleBye}>
+                <form onSubmit={handleOrderEdit}>
                   <div className="flex flex-col gap-4">
                     {/* Product Image */}
                     <img
@@ -71,27 +69,27 @@ export function CosmeticsModalUi({ product }) {
                     </div>
 
                     {/* Form Fields */}
-                    <TextField>
+                    <TextField defaultValue={product.name}>
                       <Label>Name</Label>
                       <Input name="name" placeholder="Enter your name" />
                     </TextField>
 
-                    <TextField>
+                    <TextField defaultValue={product.number}>
                       <Label>Phone Number</Label>
                       <Input name="number" placeholder="Enter your number" />
                     </TextField>
 
-                    <TextField>
+                    <TextField defaultValue={product.email}>
                       <Label>Email</Label>
                       <Input name="email" placeholder="Enter your email" />
                     </TextField>
 
-                    <TextField>
+                    <TextField defaultValue={product.location}>
                       <Label>Location</Label>
                       <Input name="location" placeholder="Enter your address" />
                     </TextField>
 
-                    <TextField>
+                    <TextField defaultValue={product.quantity}>
                       <Label>Quantity</Label>
                       <Input type="number" name="quantity" min={1} />
                     </TextField>
@@ -101,11 +99,12 @@ export function CosmeticsModalUi({ product }) {
                       Cancel
                     </Button>
 
-                    <Button slot="close"
+                    <Button
+                      slot="close"
                       type="submit"
                       className="bg-[#F5ECE8] text-[#ef885b]"
                     >
-                      Order Now
+                      Edit Order
                     </Button>
                   </Modal.Footer>
                 </form>
@@ -118,4 +117,6 @@ export function CosmeticsModalUi({ product }) {
       </Modal.Backdrop>
     </Modal>
   );
-}
+};
+
+export default OrderEditForm;

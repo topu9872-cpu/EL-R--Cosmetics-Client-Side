@@ -17,7 +17,7 @@ if(deleteData){
     }
   return (
      <AlertDialog>
-     <Button className="w-full sm:w-auto">
+     <Button variant="danger" className="w-full sm:w-auto">
                 Delete Order
               </Button>
       <AlertDialog.Backdrop

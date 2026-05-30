@@ -1,6 +1,7 @@
 import OrderDeleteForm from "@/components/OrderDeleteForm/OrderDeleteForm";
 import { getAddToCartData } from "../api/Server";
-import { Button, Card, CloseButton } from "@heroui/react";
+import { Card, CloseButton } from "@heroui/react";
+import OrderEditForm from "@/components/OrderEditForm/OrderEditForm";
 const CartPage = async () => {
   const orderData = await getAddToCartData();
   console.log(orderData);
@@ -50,7 +51,11 @@ const CartPage = async () => {
                 <span className="text-xs text-muted">Order ID: {data._id}</span>
               </div>
 
-              <OrderDeleteForm data={data} />
+              <div className="space-x-4 flex">
+                <OrderEditForm product={data} />
+
+                <OrderDeleteForm data={data} />
+              </div>
             </Card.Footer>
           </div>
         </Card>

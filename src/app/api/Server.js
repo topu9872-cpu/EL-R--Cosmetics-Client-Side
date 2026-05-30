@@ -80,3 +80,20 @@ export const getCartProductDelete = async (id) => {
     return null;
   }
 };
+
+export const getCartProductEdit = async (data, id) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API}/cart/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("faild to fetch edit cart data");
+    return res.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
